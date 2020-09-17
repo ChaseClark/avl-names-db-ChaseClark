@@ -1,6 +1,6 @@
 package edu.frostburg.cosc310.p00;
 
-public class CCRecord implements Record {
+public class CCRecord implements Record,Comparable<CCRecord> {
     private int id;
     private String firstName;
     private String lastName;
@@ -48,4 +48,18 @@ public class CCRecord implements Record {
     public String getAge() {
         return age;
     }
+
+    @Override
+    public int compareTo(CCRecord o) {
+        // there should never be duplicate id's but I will leave this here just in case.
+        if (this.id == o.id)
+            return 0;
+        // this id > param id
+        else if (this.id > o.id)
+            return 1;
+        // this id < param id
+        else
+            return -1;
+    }
+
 }
