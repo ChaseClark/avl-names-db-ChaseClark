@@ -139,7 +139,7 @@ public class CCNamesDB {
         else if (compareResult > 0)
             t.right = insert(x, t.right);
         else
-            System.out.println("Error! Duplicate name: "+x);; // duplicate, do nothing
+            System.out.println("Error! Ignore insert of duplicate name: "+x);; // duplicate, do nothing
         return balance(t);
     }
 

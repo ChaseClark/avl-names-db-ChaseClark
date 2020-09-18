@@ -14,9 +14,9 @@ public class ChaseClarkNames implements COSC310_P00{
         System.out.println(getMyName() + "'s db starting...");
         // init db
         db = new CCNamesDB();
-        add(2,"Billie","Jean",27);
-        add(1,"Dave","Topper",50);
+        add(2,"Chase","Clark",27);
         add(0,"Chase","Clark",28);
+        add(1,"Aiden","Clark",50);
         db.printTree();
 
     }

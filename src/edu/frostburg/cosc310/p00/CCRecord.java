@@ -1,5 +1,7 @@
 package edu.frostburg.cosc310.p00;
 
+import java.util.Objects;
+
 public class CCRecord implements Record,Comparable<CCRecord> {
     private int id;
     private String firstName;
@@ -52,14 +54,8 @@ public class CCRecord implements Record,Comparable<CCRecord> {
     // order by last name and then first name
     @Override
     public int compareTo(CCRecord o) {
-        if (this.id == o.id)
-            return 0;
-        // this id > param id
-        else if (this.id > o.id)
-            return 1;
-        // this id < param id
-        else
-            return -1;
+        // this should work
+        return (this.lastName + this.firstName).compareToIgnoreCase(o.lastName+o.firstName);
     }
 
     @Override
