@@ -178,7 +178,7 @@ public class CCNamesDB {
         if(t != null)
         {
             printTree(t.left);
-            System.out.println(t.element);
+            System.out.println("height: "+t.height+" "+t.element);
             printTree(t.right);
         }
     }

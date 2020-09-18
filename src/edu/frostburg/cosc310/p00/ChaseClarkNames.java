@@ -47,10 +47,30 @@ public class ChaseClarkNames implements COSC310_P00{
                 case "":
                     break;
                 case "find":
+                    // TODO: implement me
                     // check for 1 or 2 args
                     break;
                 case "add":
-                    // ensure 4 args
+                    // ensure 5 args add + 4 values
+                    if(args.length == 5)
+                    {
+                        int newId,newAge;
+                        String newFirst = args[2];
+                        String newLast = args[3];
+                        // handle cases of bad inputs for id and age
+                        try{
+                            newId = Integer.parseInt(args[1]);
+                            newAge = Integer.parseInt(args[4]);
+                        } catch (NumberFormatException e) { // if either newId or newAge are not ints then make them -1
+                            newId = -1;
+                            newAge = -1;
+                        }
+                        if (add(newId,newFirst,newLast,newAge))
+                            System.out.println("Record successfully added.");
+                        else
+                            System.out.println("Error adding record, please check the values.");
+                    } else
+                        System.out.println("Add needs to have 4 parameters");
                     break;
                 case "count":
                     System.out.println(count());
@@ -70,7 +90,7 @@ public class ChaseClarkNames implements COSC310_P00{
                     db.printTree();
                     break;
                 default:
-                    System.out.printf("Command not recognized, type ? for help");
+                    System.out.println("Command not recognized, type ? for help");
                     break;
             }
 
@@ -89,6 +109,7 @@ public class ChaseClarkNames implements COSC310_P00{
                     String[] lineArr = line.split(" ");
                     // we only want to parse lines with exactly 4 values
                     if (lineArr.length == 4)
+                        // add id, first name, last name, age
                         add(Integer.parseInt(lineArr[0]),lineArr[1],lineArr[2],Integer.parseInt(lineArr[3]));
                 }
             }
@@ -150,15 +171,29 @@ public class ChaseClarkNames implements COSC310_P00{
     public void help() {
         System.out.println("-----------------------------------");
         System.out.println("Available commands");
+        System.out.println();
+
         System.out.println("find [name] - Searches the tree for the first person with that last name and prints out " +
                 "their record if present.");
+        System.out.println();
+
         System.out.println("find [fname][lname] - Searches the tree for the person specified and prints their record" +
                 " if present.");
+        System.out.println();
+
         System.out.println("add [id][fname][lname][age] - Inserts a new record with this info or generate an error " +
                 "message if invalid.");
+        System.out.println();
+
         System.out.println("count - Print the number of names in the database.");
+        System.out.println();
+
         System.out.println("who? = Print the creator's name.");
+        System.out.println();
+
         System.out.println("? - Print this list of commands.");
+        System.out.println();
+
         System.out.println("exit - Quit the program.");
         System.out.println("-----------------------------------");
     }
