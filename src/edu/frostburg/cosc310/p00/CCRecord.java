@@ -51,7 +51,6 @@ public class CCRecord implements Record,Comparable<CCRecord> {
 
     @Override
     public int compareTo(CCRecord o) {
-        // there should never be duplicate id's but I will leave this here just in case.
         if (this.id == o.id)
             return 0;
         // this id > param id

@@ -10,6 +10,8 @@ public class ChaseClarkNames implements COSC310_P00{
     @Override
     public void go() {
         System.out.println(getMyName() + "'s db starting...");
+
+        // TODO: create an instance of CCNamesDB and insert some test nodes.
     }
 
     /**
