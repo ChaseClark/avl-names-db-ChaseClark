@@ -94,7 +94,7 @@ public class CCNamesDB {
         return t;
     }
 
-    // whiteboard this sometime
+    // Note to self: whiteboard this sometime to better understand
     private AvlNode<CCRecord> rotateWithLeftChild(AvlNode<CCRecord> k2) {
         AvlNode<CCRecord> k1 = k2.left;
         k2.left = k1.right;
@@ -128,7 +128,7 @@ public class CCNamesDB {
         root = insert(x, root);
     }
 
-    public AvlNode<CCRecord> insert(CCRecord x, AvlNode<CCRecord> t) {
+    private AvlNode<CCRecord> insert(CCRecord x, AvlNode<CCRecord> t) {
         if (t == null)
             return new AvlNode<>(x, null, null);
 
@@ -139,7 +139,7 @@ public class CCNamesDB {
         else if (compareResult > 0)
             t.right = insert(x, t.right);
         else
-            ; // duplicate, do nothing
+            System.out.println("Error! Duplicate name: "+x);; // duplicate, do nothing
         return balance(t);
     }
 

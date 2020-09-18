@@ -2,6 +2,8 @@ package edu.frostburg.cosc310.p00;
 
 public class ChaseClarkNames implements COSC310_P00{
 
+    private CCNamesDB db;
+    private boolean isRunning = true;
 
     /**
      * Runs project.  You will create an instance of your project in main
@@ -10,8 +12,13 @@ public class ChaseClarkNames implements COSC310_P00{
     @Override
     public void go() {
         System.out.println(getMyName() + "'s db starting...");
+        // init db
+        db = new CCNamesDB();
+        add(2,"Billie","Jean",27);
+        add(1,"Dave","Topper",50);
+        add(0,"Chase","Clark",28);
+        db.printTree();
 
-        // TODO: create an instance of CCNamesDB and insert some test nodes.
     }
 
     /**
@@ -42,7 +49,12 @@ public class ChaseClarkNames implements COSC310_P00{
 
     @Override
     public boolean add(int id, String fname, String lname, int age) {
-        return false;
+        // check for bad values
+        if(id < 0 || fname == null || lname == null || age < 0)
+            return false;
+        var newRecord = new CCRecord(id,fname,lname,age);
+        db.insert(newRecord);
+        return true;
     }
 
     @Override
@@ -62,6 +74,6 @@ public class ChaseClarkNames implements COSC310_P00{
 
     @Override
     public void exit() {
-
+        isRunning = false;
     }
 }

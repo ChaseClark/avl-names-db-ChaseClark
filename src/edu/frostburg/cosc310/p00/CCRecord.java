@@ -4,9 +4,9 @@ public class CCRecord implements Record,Comparable<CCRecord> {
     private int id;
     private String firstName;
     private String lastName;
-    private String age;
+    private int age;
 
-    public CCRecord(int id, String firstName, String lastName, String age) {
+    public CCRecord(int id, String firstName, String lastName, int age) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -25,7 +25,7 @@ public class CCRecord implements Record,Comparable<CCRecord> {
         this.lastName = lastName;
     }
 
-    public void setAge(String age) {
+    public void setAge(int age) {
         this.age = age;
     }
 
@@ -46,9 +46,10 @@ public class CCRecord implements Record,Comparable<CCRecord> {
 
     @Override
     public String getAge() {
-        return age;
+        return String.valueOf(age);
     }
 
+    // order by last name and then first name
     @Override
     public int compareTo(CCRecord o) {
         if (this.id == o.id)
@@ -61,4 +62,8 @@ public class CCRecord implements Record,Comparable<CCRecord> {
             return -1;
     }
 
+    @Override
+    public String toString() {
+        return "id:"+id+" firstName:"+firstName+" lastName:"+lastName+" age:"+age;
+    }
 }
