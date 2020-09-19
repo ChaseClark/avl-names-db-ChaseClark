@@ -65,6 +65,7 @@ public class CCNamesDB {
      * @return the found record or null
      */
     private CCRecord containsFullName(String fname, String lname, AvlNode<CCRecord> t) {
+        // TODO: balance on find?
         if (t == null) return null;
 
         // compare inputs to t.values
@@ -73,6 +74,34 @@ public class CCNamesDB {
             return containsFullName(fname,lname,t.left);
         else if(compareResult > 0)
             return containsFullName(fname,lname,t.right);
+        else
+            return t.element; // found!
+    }
+
+    public CCRecord containsLastName(String lname)
+    {
+        return containsLastName(lname,root);
+    }
+
+    /**
+     * Assume input is santized at this point. This method tries to find a record with a matching
+     * last name and returns the first record found.
+     * @param lname last name
+     * @param t root of tree
+     * @return the first record found or null
+     */
+    private CCRecord containsLastName(String lname, AvlNode<CCRecord> t) {
+        // TODO: balance?
+        if (t == null) return null;
+
+        // compare inputs to t.values
+        int compareResult = (lname).compareToIgnoreCase(t.element.getLastName());
+        if (compareResult < 0) {
+            return containsLastName(lname, t.left);
+        }
+        else if(compareResult > 0){
+            return containsLastName(lname,t.right);
+        }
         else
             return t.element; // found!
     }

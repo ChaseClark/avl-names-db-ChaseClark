@@ -155,7 +155,7 @@ public class ChaseClarkNames implements COSC310_P00{
 
     @Override
     public Record find(String lname) {
-        return null;
+        return  db.containsLastName(lname);
     }
 
     @Override
