@@ -12,7 +12,7 @@ public class ChaseClarkNames implements COSC310_P00{
     private CCNamesDB db;
     private boolean isRunning = true;
     private int count = 0;
-    private final String path = "src/edu/frostburg/cosc310/p00/names.txt";
+    private final String path = "./names.txt";
 
     // questions to ask
     // count using traversal or global var
