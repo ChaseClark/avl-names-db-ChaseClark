@@ -28,14 +28,12 @@ public class CCNamesDB {
         return t == null ? -1 : t.height;
     }
 
-    // modified from the textbook so that I can search for strings
     public boolean contains(CCRecord x) {
         return contains(x, root);
     }
 
     /**
      * Internal method to find an item in a subtree.
-     * Modified from the textbook to search for strings.
      * @param x is the item to search for.
      * @param t the node that roots the subtree.
      * @return true if the item is found; false otherwise.
@@ -51,6 +49,32 @@ public class CCNamesDB {
             return contains(x,t.right);
         else
             return true;
+    }
+
+    public CCRecord containsFullName(String fname, String lname)
+    {
+        return containsFullName(fname,lname,root);
+    }
+
+    /**
+     * Assume input is santized at this point. This method tries to find a record with a matching
+     * full name.
+     * @param fname first name
+     * @param lname last name
+     * @param t root of tree
+     * @return the found record or null
+     */
+    private CCRecord containsFullName(String fname, String lname, AvlNode<CCRecord> t) {
+        if (t == null) return null;
+
+        // compare inputs to t.values
+        int compareResult = (lname+fname).compareToIgnoreCase(t.element.getLastName()+t.element.getFirstName());
+        if (compareResult < 0)
+            return containsFullName(fname,lname,t.left);
+        else if(compareResult > 0)
+            return containsFullName(fname,lname,t.right);
+        else
+            return t.element; // found!
     }
 
     public CCRecord findMin() {

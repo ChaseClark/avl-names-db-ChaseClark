@@ -160,11 +160,7 @@ public class ChaseClarkNames implements COSC310_P00{
 
     @Override
     public Record find(String fname, String lname) {
-       CCRecord temp = new CCRecord(-1,fname,lname,-1);
-       if (db.contains(temp))
-            return temp;
-       return null;
-
+       return db.containsFullName(fname,lname);
     }
 
     @Override
