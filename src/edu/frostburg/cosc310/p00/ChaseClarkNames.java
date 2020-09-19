@@ -3,7 +3,6 @@ package edu.frostburg.cosc310.p00;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.util.List;
 import java.util.Scanner;
 
@@ -21,8 +20,7 @@ public class ChaseClarkNames implements COSC310_P00{
 
 
     /**
-     * Runs project.  You will create an instance of your project in main
-     * and then have it invoke this method to begin running.
+     * Sets the database up and then runs the main input loop.
      */
     @Override
     public void go() {
@@ -37,13 +35,13 @@ public class ChaseClarkNames implements COSC310_P00{
         {
             String input = in.nextLine();
             // convert input into array with 1 or more elements
-            String[] args = input.trim().split(" ");
+            String[] args = input.trim().toLowerCase().split(" ");
             // switch over the first argument
             switch (args[0]) {
                 case "":
                     break;
                 case "find":
-                    // check for 1 or 2 args
+                    // check for 2 or 3 args to determine which find to use
                     if(args.length == 2) // find last name
                     {
                         CCRecord result = (CCRecord)find(args[1]);
@@ -82,8 +80,9 @@ public class ChaseClarkNames implements COSC310_P00{
                             newId = -1;
                             newAge = -1;
                         }
-                        if (add(newId,newFirst,newLast,newAge))
+                        if (add(newId,newFirst,newLast,newAge)) {
                             System.out.println("Record successfully added.");
+                        }
                         else
                             System.out.println("Error adding record, please check the values.");
                     } else
@@ -117,6 +116,10 @@ public class ChaseClarkNames implements COSC310_P00{
         System.exit(0);
     }
 
+    /**
+     * parses text file and adds records to db.
+     * @param path of text file
+     */
     private void insertRecordsFromFile(String path) {
         try {
             List<String> allLines = Files.readAllLines(Path.of(path));
@@ -138,31 +141,40 @@ public class ChaseClarkNames implements COSC310_P00{
     }
 
     /**
-     * Returns your name
+     * Returns my name
      **/
     @Override
     public String getMyName() {
         return "Chase Clark";
     }
 
-    /**
-     * The following methods should be implemented for this assignment.
-     */
     @Override
     public void find() {
 
     }
 
+    /**
+     * Queries the database for a record with a matching last name.
+     * @param lname last name
+     * @return the first matching record found, or null
+     */
     @Override
     public Record find(String lname) {
         return  db.containsLastName(lname);
     }
 
+    /**
+     * Queries the database for a record with a matching first and last name.
+     * @param fname first name
+     * @param lname last name
+     * @return matching record found, or null
+     */
     @Override
     public Record find(String fname, String lname) {
        return db.containsFullName(fname,lname);
     }
 
+    // adds record to the database
     @Override
     public boolean add(int id, String fname, String lname, int age) {
         // check for bad values
@@ -179,11 +191,13 @@ public class ChaseClarkNames implements COSC310_P00{
         return count;
     }
 
+    // prints my name to console
     @Override
     public void who() {
         System.out.println(getMyName());
     }
 
+    // prints a list of commands
     @Override
     public void help() {
         System.out.println("-----------------------------------");
@@ -215,6 +229,7 @@ public class ChaseClarkNames implements COSC310_P00{
         System.out.println("-----------------------------------");
     }
 
+    // ends the program by killing the input loop
     @Override
     public void exit() {
         System.out.println("Shutting down...goodbye");

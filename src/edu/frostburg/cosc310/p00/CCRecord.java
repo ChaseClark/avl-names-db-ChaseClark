@@ -1,7 +1,9 @@
 package edu.frostburg.cosc310.p00;
 
-import java.util.Objects;
 
+/**
+ * A class to represent a record in a database.
+ */
 public class CCRecord implements Record,Comparable<CCRecord> {
     private int id;
     private String firstName;
@@ -12,22 +14,6 @@ public class CCRecord implements Record,Comparable<CCRecord> {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
-        this.age = age;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public void setAge(int age) {
         this.age = age;
     }
 
@@ -58,6 +44,7 @@ public class CCRecord implements Record,Comparable<CCRecord> {
         return (this.lastName + this.firstName).compareToIgnoreCase(o.lastName+o.firstName);
     }
 
+    // override toString so we can print the record directly
     @Override
     public String toString() {
         return "id:"+id+" firstName:"+firstName+" lastName:"+lastName+" age:"+age;

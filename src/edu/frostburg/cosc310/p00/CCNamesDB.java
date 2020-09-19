@@ -1,5 +1,9 @@
 package edu.frostburg.cosc310.p00;
 
+/**
+ * This class is an AVL Tree of type CCRecord
+ * with some custom methods for string searching.
+ */
 public class CCNamesDB {
     // left and right sub trees can only differ by a height of 1
     private static final int ALLOWED_IMBALANCE = 1;
@@ -57,7 +61,7 @@ public class CCNamesDB {
     }
 
     /**
-     * Assume input is santized at this point. This method tries to find a record with a matching
+     * Assume input is sanitized at this point. This method tries to find a record with a matching
      * full name.
      * @param fname first name
      * @param lname last name
@@ -65,7 +69,6 @@ public class CCNamesDB {
      * @return the found record or null
      */
     private CCRecord containsFullName(String fname, String lname, AvlNode<CCRecord> t) {
-        // TODO: balance on find?
         if (t == null) return null;
 
         // compare inputs to t.values
@@ -91,7 +94,6 @@ public class CCNamesDB {
      * @return the first record found or null
      */
     private CCRecord containsLastName(String lname, AvlNode<CCRecord> t) {
-        // TODO: balance?
         if (t == null) return null;
 
         // compare inputs to t.values
@@ -131,6 +133,7 @@ public class CCNamesDB {
         return t;
     }
 
+    // balances the tree
     private AvlNode<CCRecord> balance(AvlNode<CCRecord> t) {
         if (t == null) return t;
 
@@ -149,7 +152,7 @@ public class CCNamesDB {
         return t;
     }
 
-    // Note to self: whiteboard this sometime to better understand
+    // Note to self: whiteboard these rotation methods sometime to better understand
     private AvlNode<CCRecord> rotateWithLeftChild(AvlNode<CCRecord> k2) {
         AvlNode<CCRecord> k1 = k2.left;
         k2.left = k1.right;
@@ -178,11 +181,17 @@ public class CCNamesDB {
         return rotateWithRightChild(k3);
     }
 
-    // insert first element in tree
+
     public void insert(CCRecord x) {
         root = insert(x, root);
     }
 
+    /**
+     * Internal method to insert into a subtree.
+     * @param x the item to insert.
+     * @param t the node that roots the subtree.
+     * @return the new root of the subtree.
+     */
     private AvlNode<CCRecord> insert(CCRecord x, AvlNode<CCRecord> t) {
         if (t == null)
             return new AvlNode<>(x, null, null);
@@ -202,6 +211,12 @@ public class CCNamesDB {
         remove(x, root);
     }
 
+    /**
+     * Internal method to remove from a subtree.
+     * @param x the item to remove.
+     * @param t the node that roots the subtree.
+     * @return the new root of the subtree.
+     */
     public AvlNode<CCRecord> remove(CCRecord x, AvlNode<CCRecord> t) {
         if (t == null)
             return t; //item not found do nothing
@@ -229,6 +244,10 @@ public class CCNamesDB {
             printTree(root);
     }
 
+    /**
+     * In order traversal of the tree, prints the height and element to the console
+     * @param t root note
+     */
     private void printTree(AvlNode<CCRecord> t) {
         if(t != null)
         {
