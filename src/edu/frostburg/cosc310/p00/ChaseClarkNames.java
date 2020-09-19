@@ -29,10 +29,6 @@ public class ChaseClarkNames implements COSC310_P00{
         System.out.println(getMyName() + "'s db starting...");
         // init db
         db = new CCNamesDB();
-//        add(2,"Chase","Clark",27);
-//        add(0,"Chase","Clark",28);
-//        add(1,"Aiden","Clark",50);
-//        db.printTree();
         insertRecordsFromFile(path);
         System.out.println("Please enter a command or type '?' for help");
         Scanner in = new Scanner(System.in);
@@ -47,8 +43,29 @@ public class ChaseClarkNames implements COSC310_P00{
                 case "":
                     break;
                 case "find":
-                    // TODO: implement me
                     // check for 1 or 2 args
+                    if(args.length == 2) // find last name
+                    {
+                        CCRecord result = (CCRecord)find(args[1]);
+                        if(result != null)
+                        {
+                            System.out.println(result);
+                        } else {
+                            System.out.println("Record not found");
+                        }
+                    }
+                    else if(args.length == 3) // find full name
+                    {
+                        CCRecord result = (CCRecord)find(args[1],args[2]);
+                        if(result != null)
+                        {
+                            System.out.println(result);
+                        } else {
+                            System.out.println("Record not found");
+                        }
+                    }
+                    else // wrong amount of args
+                        System.out.println("invalid arguments, type ? for help");
                     break;
                 case "add":
                     // ensure 5 args add + 4 values
@@ -137,13 +154,17 @@ public class ChaseClarkNames implements COSC310_P00{
     }
 
     @Override
-    public Record find(String name) {
+    public Record find(String lname) {
         return null;
     }
 
     @Override
     public Record find(String fname, String lname) {
-        return null;
+       CCRecord temp = new CCRecord(-1,fname,lname,-1);
+       if (db.contains(temp))
+            return temp;
+       return null;
+
     }
 
     @Override
@@ -177,11 +198,11 @@ public class ChaseClarkNames implements COSC310_P00{
                 "their record if present.");
         System.out.println();
 
-        System.out.println("find [fname][lname] - Searches the tree for the person specified and prints their record" +
+        System.out.println("find [fname] [lname] - Searches the tree for the person specified and prints their record" +
                 " if present.");
         System.out.println();
 
-        System.out.println("add [id][fname][lname][age] - Inserts a new record with this info or generate an error " +
+        System.out.println("add [id] [fname] [lname] [age] - Inserts a new record with this info or generate an error " +
                 "message if invalid.");
         System.out.println();
 

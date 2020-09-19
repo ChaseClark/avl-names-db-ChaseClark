@@ -28,12 +28,14 @@ public class CCNamesDB {
         return t == null ? -1 : t.height;
     }
 
+    // modified from the textbook so that I can search for strings
     public boolean contains(CCRecord x) {
         return contains(x, root);
     }
 
     /**
      * Internal method to find an item in a subtree.
+     * Modified from the textbook to search for strings.
      * @param x is the item to search for.
      * @param t the node that roots the subtree.
      * @return true if the item is found; false otherwise.
